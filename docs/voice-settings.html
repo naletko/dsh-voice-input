@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<title>Voice settings form preview</title>
+<style>
+  :root {
+    --label-primary: #ececf1; --label-secondary: #a9a9b0; --label-tertiary: rgba(255,255,255,0.4);
+    --business: #4176e6; --bg-2: rgba(255,255,255,0.05); --bg-3: rgba(255,255,255,0.08);
+    --border-1: rgba(255,255,255,0.12); --border-2: rgba(255,255,255,0.18);
+  }
+  body { margin: 0; padding: 28px 32px; background: #17171a; color: var(--label-primary);
+         font: 13px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; }
+  .panel { max-width: 620px; }
+  .panel-title { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  .panel-sub { font-size: 12px; color: var(--label-secondary); margin: 0 0 18px; }
+
+  .dsh-vr-form { display: flex; flex-direction: column; gap: 14px; max-width: 460px; padding: 2px 0 6px; }
+  .dsh-vr-field { display: flex; flex-direction: column; gap: 6px; }
+  .dsh-vr-field-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .dsh-vr-field-label { font-size: 12px; font-weight: 500; color: var(--label-secondary); }
+  .dsh-vr-field-input {
+    width: 100%; box-sizing: border-box; padding: 8px 10px; font: inherit; font-size: 13px; line-height: 1.4;
+    color: var(--label-primary); background: var(--bg-2); border: 1px solid var(--border-1);
+    border-radius: 8px; outline: none; transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .dsh-vr-field-input::placeholder { color: var(--label-tertiary); }
+  .dsh-vr-field-input:hover { border-color: var(--border-2); }
+  .dsh-vr-field-input:focus { border-color: var(--business); box-shadow: 0 0 0 3px rgba(65,118,230,0.16); }
+  .dsh-vr-link { padding: 0; border: none; background: none; font: inherit; font-size: 11px; color: var(--business); cursor: pointer; }
+  .dsh-vr-link:hover { text-decoration: underline; }
+  .dsh-vr-form-actions { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+  .dsh-vr-action {
+    display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 14px;
+    font: inherit; font-size: 12px; font-weight: 500; border-radius: 8px;
+    border: 1px solid var(--border-2); background: transparent; color: var(--label-primary); cursor: pointer;
+    transition: background 120ms ease, filter 120ms ease;
+  }
+  .dsh-vr-action:hover { background: var(--bg-3); }
+  .dsh-vr-action-primary { background: var(--business); border-color: var(--business); color: #fff; }
+  .dsh-vr-action-primary:hover { filter: brightness(1.1); }
+  .dsh-vr-form-status { font-size: 11px; color: var(--label-tertiary); }
+  .dsh-vr-form-hint { font-size: 11px; line-height: 1.5; color: var(--label-tertiary); }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <p class="panel-title">dsh-voice-input</p>
+    <p class="panel-sub">Experimental voice input with local SenseVoice; downloads its runtime on first use</p>
+    <div class="dsh-vr-form">
+      <div class="dsh-vr-field">
+        <label class="dsh-vr-field-label">Provider API Base URL</label>
+        <input class="dsh-vr-field-input" type="text" value="wss://api.x.ai/v1/stt" />
+      </div>
+      <div class="dsh-vr-field">
+        <div class="dsh-vr-field-head">
+          <label class="dsh-vr-field-label">API Key</label>
+          <button class="dsh-vr-link">Show</button>
+        </div>
+        <input class="dsh-vr-field-input" type="password" value="your-xai-api-key" />
+      </div>
+      <div class="dsh-vr-field">
+        <label class="dsh-vr-field-label">Model ID</label>
+        <input class="dsh-vr-field-input" type="text" value="grok-voice-transcribe-2.0" />
+      </div>
+      <div class="dsh-vr-form-actions">
+        <button class="dsh-vr-action dsh-vr-action-primary">Save</button>
+        <button class="dsh-vr-action">Reset Defaults</button>
+        <span class="dsh-vr-form-status">Saved</span>
+      </div>
+      <div class="dsh-vr-form-hint">xAI streams speech: use wss://api.x.ai/v1/stt and leave the model as is — it is ignored on that endpoint. Any OpenAI-compatible HTTP endpoint works too, then the model is sent as the transcription model.</div>
+    </div>
+  </div>
+</body>
+</html>

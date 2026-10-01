@@ -192,5 +192,21 @@ credential:
 ```
 node test/settings-check.mjs   # slots, composer, bar structure, form styling, render
 node test/stream-check.mjs     # streaming parsing, replaying the captured xAI events
+node test/metadata-check.mjs   # the card's title, description and icon contract
 ```
+
+## Plugin display metadata
+
+The Plugins page shows a plugin's title and description from
+`locale/<language>.json` (`meta.title`, `meta.description`) and its icon from the
+`icon` field of `package.json`. Both are resolved **through the package's
+`exports` map**, so `./package.json` and `./locale/*.json` have to stay exported:
+without those subpaths the manager cannot read the manifest at all and the card
+falls back to the bare module name with no description — even though the files
+exist. Icons must be a relative path inside the package, one of SVG, PNG, JPEG or
+WebP, and at most 256 KiB; `test/metadata-check.mjs` guards the whole contract.
+
+Current metadata: title **Voice Input by Alex Naletko**, a one-line description of
+what the plugin does, and `icon.svg` (a blue waveform). `locale/ru.json` carries
+the Russian translation, which the UI uses when its language is Russian.
 

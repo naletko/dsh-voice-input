@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Voice Input by Alex Naletko",
+    "description": "Dictate instead of typing: record with the microphone, listen back, and drop the transcript into the draft. Speaks to xAI Grok STT over its streaming socket, or to any OpenAI-compatible transcription endpoint."
+  }
+}

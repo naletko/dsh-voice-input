@@ -4,6 +4,9 @@ window.__ModuleLoader__.load({
     const React = require('react');
     const { createElement: h, useState, useEffect, useRef, useCallback } = React;
 
+    // One line, so a stale bundle in the browser is obvious from the console.
+    console.info('[dsh-voice-input] client bundle loaded · capsule bar, styled settings, own stylesheet');
+
     const DEFAULT_CONFIG = {
       url: '',
       apiKey: '',
@@ -861,6 +864,9 @@ window.__ModuleLoader__.load({
       };
 
       return h('div', { className: 'dsh-vr-form' },
+        // The form carries its own styles: it renders on the plugin page, which
+        // must not depend on the composer's microphone being mounted.
+        h('style', null, STYLES),
         h('div', { className: 'dsh-vr-field' },
           h('label', { className: 'dsh-vr-field-label' }, 'Provider API Base URL'),
           h('input', {
@@ -1057,6 +1063,7 @@ window.__ModuleLoader__.load({
       }, [tone, shimmer, peaks, progress, analyserRef]);
 
       return h('div', { className: 'dsh-vr-bar' },
+        h('style', null, STYLES),
         leading ? h('button', {
           className: 'dsh-vr-round' + (leading.kind ? ' dsh-vr-round-' + leading.kind : ''),
           title: leading.title,

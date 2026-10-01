@@ -219,7 +219,11 @@ check("capsule hosts the wave canvas", classes.includes("dsh-vr-bar-wave"));
 check("capsule has round controls", classes.filter((name) => name.startsWith("dsh-vr-round")).length >= 4, String(classes.filter((name) => name.startsWith("dsh-vr-round")).length));
 check("discard sits on the left, send on the right", classes.some((name) => name === "dsh-vr-round") && classes.some((name) => name.includes("dsh-vr-round-send")), classes.join(" | "));
 check("a stop control is ringed, like the reference", classes.some((name) => name.includes("dsh-vr-round-stop")), classes.join(" | "));
-check("no text labels inside the capsule", recording.bar.elements.every((element) => (element.children ?? []).every((child) => typeof child !== "string" || child.trim() === "")), JSON.stringify(recording.bar.texts.slice(0, 5)));
+check("no text labels inside the capsule", recording.bar.elements
+	.filter((element) => element.type !== "style")
+	.every((element) => (element.children ?? []).every((child) => typeof child !== "string" || child.trim() === "")), JSON.stringify(recording.bar.texts.slice(0, 5)));
+check("the capsule carries its own stylesheet", recording.bar.elements.some((element) => element.type === "style"));
+check("the settings form carries its own stylesheet", formElements.some((element) => element.type === "style"));
 
 console.log("feedback around the microphone");
 const sending = renderMode("sending");
